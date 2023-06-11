@@ -185,8 +185,6 @@ if __name__ == '__main__':
     start_city = 7
     mutation_rate = 0.2
 
-    np.random.seed(42)
-
     # Create matrix of distrances where distance[i][j] corresponds to distance between city i and j in that order
     # This means that distance i -> j != distance j -> i
     distances = np.random.randint(2, 100, size=(N_cities, N_cities))

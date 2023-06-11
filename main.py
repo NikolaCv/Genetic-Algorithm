@@ -124,7 +124,7 @@ def mutation(individual, mutation_rate):
 
 
 def genetic_algorithm(N, N_cities, N_populations, N_generations, start_city, N_elitism, mutation_rate, distances,
-                      info_every_K_epochs=10):
+                       stop_population_at_fitness, info_every_K_epochs=10):
     max_distance = N_cities * np.max(distances) * 2
 
     best_solution = {
@@ -157,6 +157,9 @@ def genetic_algorithm(N, N_cities, N_populations, N_generations, start_city, N_e
 
             if not i % info_every_K_epochs:
                 print(f'Population {k}, Gen: {i}\nBest current: {population_fitness[0]}, Best overall: {best_solution}')
+
+            if population_fitness[0] <= stop_population_at_fitness:
+                break
 
         if best_solution["Distance"] > population_fitness[0]:
             best_solution["Distance"] = population_fitness[0]
@@ -196,6 +199,6 @@ if __name__ == '__main__':
     distances[N_cities - 1][N_cities - 1] = 0
 
     best_solution = genetic_algorithm(N, N_cities, N_populations, N_generations, start_city, N_elitism, mutation_rate,
-                                      distances, info_every_K_epochs=50)
+                                      distances, stop_population_at_fitness=20, info_every_K_epochs=50)
 
     print(best_solution)

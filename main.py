@@ -24,7 +24,8 @@ def fitness(population, N_cities, distances, start_city):
 
         # Add the distance from the last city to the start city and from the start city to the first city
         sumF += distances[population[i][N_cities - 2]][start_city]
-        sumF += distances[population[i][0]][start_city]
+        sumF += distances[start_city][population[i][0]]
+
         population_fitness.append(sumF)
 
     return population_fitness
